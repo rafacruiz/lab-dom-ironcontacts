@@ -69,6 +69,42 @@ threeContacts.forEach(contact => {
   };
 });
 
+buttonAddRandom.onclick = () => {
+  const randomIndex = Math.floor(Math.random() * contacts.length);
+  const splicedArr = contacts.splice(randomIndex, 1);
+
+  // Get the element from the spliced array
+  const randomContact = splicedArr[0];
+
+  const randomRow = document.createElement("tr");
+  randomRow.innerHTML = `
+    <td>
+      <img src="${randomContact.pictureUrl}" />
+    </td>
+    <td> ${randomContact.name} </td>
+    <td> ${randomContact.popularity.toFixed(2)} </td>
+    <td>
+      <button class="btn-delete">Delete</button>
+    </td>
+    <td>
+      <button class="btn-like">
+        <img src="./images/icon.png" alt="like" />
+      </button>
+    </td>
+  `;
+
+  tableBody.appendChild(randomRow);
+
+  const del = randomRow.querySelector('.btn-delete');
+  del.onclick = () => {
+    randomRow.remove();
+  }
+
+  const like = randomRow.querySelector('.btn-like');
+  like.onclick = () => {
+    like.classList.toggle('selected');
+  };
+}
 
 
   
